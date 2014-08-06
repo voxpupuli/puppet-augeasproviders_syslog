@@ -1,6 +1,6 @@
-# syslog: type/provider for shell files for Puppet
+# syslog: type/provider for syslog files for Puppet
 
-This module provides a new type/provider for Puppet to read and modify shell
+This module provides a new type/provider for Puppet to read and modify syslog
 config files using the Augeas configuration library.
 
 The advantage of using Augeas over the default Puppet `parsedfile`
