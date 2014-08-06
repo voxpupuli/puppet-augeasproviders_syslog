@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/hercules-team/augeasproviders_syslog.svg?branch=master)](https://travis-ci.org/hercules-team/augeasproviders_syslog)
+[![Coverage Status](https://img.shields.io/coveralls/hercules-team/augeasproviders_syslog.svg)](https://coveralls.io/r/hercules-team/augeasproviders_syslog)
+
+
 # syslog: type/provider for syslog files for Puppet
 
 This module provides a new type/provider for Puppet to read and modify syslog
