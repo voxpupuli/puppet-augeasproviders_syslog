@@ -73,7 +73,7 @@ deploy:
   provider: puppetforge
   user: herculesteam
   password:
-    secure: ""
+    secure: "RLs24P20I18PvFHgYbOieTGUEwJzhbQFF4fWgpJSf7iM2Q0bxhNQnUdzDXfLMfRwQ/lQGZSQ6eZ5sr/MdzI/qIT13zHM/B+Fv+ZszE/nNZzVTpjhI6vStQrUAZlD76Tx/QJN5bvu0QjFjGyK9DY26FVHqWcYvDHg0L2sQ269uFU="
   on:
     tags: true
     # all_branches is required to use tags
