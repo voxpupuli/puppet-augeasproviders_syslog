@@ -1,3 +1,6 @@
 ---
 .travis.yml:
   forge_password: "RLs24P20I18PvFHgYbOieTGUEwJzhbQFF4fWgpJSf7iM2Q0bxhNQnUdzDXfLMfRwQ/lQGZSQ6eZ5sr/MdzI/qIT13zHM/B+Fv+ZszE/nNZzVTpjhI6vStQrUAZlD76Tx/QJN5bvu0QjFjGyK9DY26FVHqWcYvDHg0L2sQ269uFU="
+  other_env: |
+    # other env
+      - PUPPET=3.4 RUBY_AUGEAS=0.5 AUGEAS=1.1.0 LENSES=el7

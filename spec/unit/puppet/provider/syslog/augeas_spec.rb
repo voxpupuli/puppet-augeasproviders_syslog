@@ -12,6 +12,8 @@ describe provider_class do
     FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
   end
 
+  let(:protocol_supported) { subject.protocol_supported }
+
   context "with empty file" do
     let(:tmptarget) { aug_fixture("empty") }
     let(:target) { tmptarget.path }
@@ -34,6 +36,137 @@ describe provider_class do
         aug.match("entry/action/no_sync").size.should == 0
       end
     end
+
+    it "should create hostname entry with tcp protocol" do
+      if protocol_supported
+        apply!(Puppet::Type.type(:syslog).new(
+          :name            => "hostname test",
+          :facility        => "*",
+          :level           => "*",
+          :action_type     => "hostname",
+          :action_protocol => "tcp",
+          :action          => "remote-host",
+          :target          => target,
+          :provider        => "augeas",
+          :ensure          => "present"
+        ))
+
+        aug_open(target, "Syslog.lns") do |aug|
+          aug.match("entry").size.should == 1
+          aug.get("entry/action/protocol").should == "@@"
+          aug.match("entry/action/port").size.should == 0
+        end
+      else
+        txn = apply(Puppet::Type.type(:syslog).new(
+          :name            => "hostname test",
+          :facility        => "*",
+          :level           => "*",
+          :action_type     => "hostname",
+          :action_protocol => "tcp",
+          :action          => "remote-host",
+          :target          => target,
+          :provider        => "augeas",
+          :ensure          => "present"
+        ))
+        txn.any_failed?.should_not == nil
+        @logs[0].level.should == :err
+        @logs[0].message.include?('Protocol is not supported').should == true
+      end
+    end
+
+    it "should create hostname entry with udp protocol" do
+      if protocol_supported == :stock
+        apply!(Puppet::Type.type(:syslog).new(
+          :name            => "hostname test",
+          :facility        => "*",
+          :level           => "*",
+          :action_type     => "hostname",
+          :action_protocol => "udp",
+          :action          => "remote-host",
+          :target          => target,
+          :provider        => "augeas",
+          :ensure          => "present"
+        ))
+
+        aug_open(target, "Syslog.lns") do |aug|
+          aug.match("entry").size.should == 1
+          aug.get("entry/action/protocol").should == "@"
+          aug.match("entry/action/port").size.should == 0
+        end
+      elsif protocol_supported == :el7
+        apply!(Puppet::Type.type(:syslog).new(
+          :name            => "hostname test",
+          :facility        => "*",
+          :level           => "*",
+          :action_type     => "hostname",
+          :action_protocol => "udp",
+          :action          => "remote-host",
+          :target          => target,
+          :provider        => "augeas",
+          :ensure          => "present"
+        ))
+
+        aug_open(target, "Syslog.lns") do |aug|
+          aug.match("entry").size.should == 1
+          aug.match("entry/action/protocol").size.should == 0
+          aug.match("entry/action/port").size.should == 0
+        end
+      else
+        txn = apply(Puppet::Type.type(:syslog).new(
+          :name            => "hostname test",
+          :facility        => "*",
+          :level           => "*",
+          :action_type     => "hostname",
+          :action_protocol => "udp",
+          :action          => "remote-host",
+          :target          => target,
+          :provider        => "augeas",
+          :ensure          => "present"
+        ))
+        txn.any_failed?.should_not == nil
+        @logs[0].level.should == :err
+        @logs[0].message.include?('Protocol is not supported').should == true
+      end
+    end
+
+    it "should create hostname entry with port" do
+      if protocol_supported  # port requires protocol
+        apply!(Puppet::Type.type(:syslog).new(
+          :name            => "hostname test",
+          :facility        => "*",
+          :level           => "*",
+          :action_type     => "hostname",
+          :action_port     => "514",
+          :action_protocol => "tcp",
+          :action          => "remote-host",
+          :target          => target,
+          :provider        => "augeas",
+          :ensure          => "present"
+        ))
+
+        aug_open(target, "Syslog.lns") do |aug|
+          aug.match("entry").size.should == 1
+          aug.get("entry/action/protocol").should == "@@"
+          aug.get("entry/action/port").should == "514"
+        end
+      else
+        txn = apply(Puppet::Type.type(:syslog).new(
+          :name            => "hostname test",
+          :facility        => "*",
+          :level           => "*",
+          :action_type     => "hostname",
+          :action_port     => "514",
+          :action_protocol => "tcp",
+          :action          => "remote-host",
+          :target          => target,
+          :provider        => "augeas",
+          :ensure          => "present"
+        ))
+        txn.any_failed?.should_not == nil
+        @logs[0].level.should == :err
+        @logs[0].message.include?('Protocol is not supported').should == true
+      end
+    end
   end
 
   context "with full file" do
@@ -50,16 +183,18 @@ describe provider_class do
           :level => p.get(:level),
           :no_sync => p.get(:no_sync),
           :action_type => p.get(:action_type),
+          :action_port => p.get(:action_port),
+          :action_protocol => p.get(:action_protocol),
           :action => p.get(:action),
         }
       }
 
       inst.size.should == 10
-      inst[0].should == {:name=>"*.info /var/log/messages", :ensure=>:present, :facility=>"*", :level=>"info", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages"}
-      inst[1].should == {:name=>"mail.none /var/log/messages", :ensure=>:present, :facility=>"mail", :level=>"none", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages"}
-      inst[5].should == {:name=>"mail.* -/var/log/maillog", :ensure=>:present, :facility=>"mail", :level=>"*", :no_sync=>:true, :action_type=>"file", :action=>"/var/log/maillog"}
-      inst[8].should == {:name=>"uucp.crit /var/log/spooler", :ensure=>:present, :facility=>"uucp", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler"}
-      inst[9].should == {:name=>"news.crit /var/log/spooler", :ensure=>:present, :facility=>"news", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler"}
+      inst[0].should == {:name=>"*.info /var/log/messages", :ensure=>:present, :facility=>"*", :level=>"info", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages", :action_port=>:absent, :action_protocol=>:absent}
+      inst[1].should == {:name=>"mail.none /var/log/messages", :ensure=>:present, :facility=>"mail", :level=>"none", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages", :action_port=>:absent, :action_protocol=>:absent}
+      inst[5].should == {:name=>"mail.* -/var/log/maillog", :ensure=>:present, :facility=>"mail", :level=>"*", :no_sync=>:true, :action_type=>"file", :action=>"/var/log/maillog", :action_port=>:absent, :action_protocol=>:absent}
+      inst[8].should == {:name=>"uucp.crit /var/log/spooler", :ensure=>:present, :facility=>"uucp", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler", :action_port=>:absent, :action_protocol=>:absent}
+      inst[9].should == {:name=>"news.crit /var/log/spooler", :ensure=>:present, :facility=>"news", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler", :action_port=>:absent, :action_protocol=>:absent}
     end
 
     describe "when creating settings" do
