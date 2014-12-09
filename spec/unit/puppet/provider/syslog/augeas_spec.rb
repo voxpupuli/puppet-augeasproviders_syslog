@@ -31,9 +31,9 @@ describe provider_class do
       ))
 
       aug_open(target, "Syslog.lns") do |aug|
-        aug.match("entry").size.should == 1
-        aug.get("entry/action/file").should == "/var/log/test.log"
-        aug.match("entry/action/no_sync").size.should == 0
+        expect(aug.match("entry").size).to eq(1)
+        expect(aug.get("entry/action/file")).to eq("/var/log/test.log")
+        expect(aug.match("entry/action/no_sync").size).to eq(0)
       end
     end
 
@@ -52,9 +52,9 @@ describe provider_class do
         ))
 
         aug_open(target, "Syslog.lns") do |aug|
-          aug.match("entry").size.should == 1
-          aug.get("entry/action/protocol").should == "@@"
-          aug.match("entry/action/port").size.should == 0
+          expect(aug.match("entry").size).to eq(1)
+          expect(aug.get("entry/action/protocol")).to eq("@@")
+          expect(aug.match("entry/action/port").size).to eq(0)
         end
       else
         txn = apply(Puppet::Type.type(:syslog).new(
@@ -68,9 +68,9 @@ describe provider_class do
           :provider        => "augeas",
           :ensure          => "present"
         ))
-        txn.any_failed?.should_not == nil
-        @logs[0].level.should == :err
-        @logs[0].message.include?('Protocol is not supported').should == true
+        expect(txn.any_failed?).not_to eq(nil)
+        expect(@logs[0].level).to eq(:err)
+        expect(@logs[0].message.include?('Protocol is not supported')).to eq(true)
       end
     end
 
@@ -89,9 +89,9 @@ describe provider_class do
         ))
 
         aug_open(target, "Syslog.lns") do |aug|
-          aug.match("entry").size.should == 1
-          aug.get("entry/action/protocol").should == "@"
-          aug.match("entry/action/port").size.should == 0
+          expect(aug.match("entry").size).to eq(1)
+          expect(aug.get("entry/action/protocol")).to eq("@")
+          expect(aug.match("entry/action/port").size).to eq(0)
         end
       elsif protocol_supported == :el7
         apply!(Puppet::Type.type(:syslog).new(
@@ -107,9 +107,9 @@ describe provider_class do
         ))
 
         aug_open(target, "Syslog.lns") do |aug|
-          aug.match("entry").size.should == 1
-          aug.match("entry/action/protocol").size.should == 0
-          aug.match("entry/action/port").size.should == 0
+          expect(aug.match("entry").size).to eq(1)
+          expect(aug.match("entry/action/protocol").size).to eq(0)
+          expect(aug.match("entry/action/port").size).to eq(0)
         end
       else
         txn = apply(Puppet::Type.type(:syslog).new(
@@ -123,9 +123,9 @@ describe provider_class do
           :provider        => "augeas",
           :ensure          => "present"
         ))
-        txn.any_failed?.should_not == nil
-        @logs[0].level.should == :err
-        @logs[0].message.include?('Protocol is not supported').should == true
+        expect(txn.any_failed?).not_to eq(nil)
+        expect(@logs[0].level).to eq(:err)
+        expect(@logs[0].message.include?('Protocol is not supported')).to eq(true)
       end
     end
 
@@ -145,9 +145,9 @@ describe provider_class do
         ))
 
         aug_open(target, "Syslog.lns") do |aug|
-          aug.match("entry").size.should == 1
-          aug.get("entry/action/protocol").should == "@@"
-          aug.get("entry/action/port").should == "514"
+          expect(aug.match("entry").size).to eq(1)
+          expect(aug.get("entry/action/protocol")).to eq("@@")
+          expect(aug.get("entry/action/port")).to eq("514")
         end
       else
         txn = apply(Puppet::Type.type(:syslog).new(
@@ -162,9 +162,9 @@ describe provider_class do
           :provider        => "augeas",
           :ensure          => "present"
         ))
-        txn.any_failed?.should_not == nil
-        @logs[0].level.should == :err
-        @logs[0].message.include?('Protocol is not supported').should == true
+        expect(txn.any_failed?).not_to eq(nil)
+        expect(@logs[0].level).to eq(:err)
+        expect(@logs[0].message.include?('Protocol is not supported')).to eq(true)
       end
     end
   end
@@ -189,12 +189,12 @@ describe provider_class do
         }
       }
 
-      inst.size.should == 10
-      inst[0].should == {:name=>"*.info /var/log/messages", :ensure=>:present, :facility=>"*", :level=>"info", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages", :action_port=>:absent, :action_protocol=>:absent}
-      inst[1].should == {:name=>"mail.none /var/log/messages", :ensure=>:present, :facility=>"mail", :level=>"none", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages", :action_port=>:absent, :action_protocol=>:absent}
-      inst[5].should == {:name=>"mail.* -/var/log/maillog", :ensure=>:present, :facility=>"mail", :level=>"*", :no_sync=>:true, :action_type=>"file", :action=>"/var/log/maillog", :action_port=>:absent, :action_protocol=>:absent}
-      inst[8].should == {:name=>"uucp.crit /var/log/spooler", :ensure=>:present, :facility=>"uucp", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler", :action_port=>:absent, :action_protocol=>:absent}
-      inst[9].should == {:name=>"news.crit /var/log/spooler", :ensure=>:present, :facility=>"news", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler", :action_port=>:absent, :action_protocol=>:absent}
+      expect(inst.size).to eq(10)
+      expect(inst[0]).to eq({:name=>"*.info /var/log/messages", :ensure=>:present, :facility=>"*", :level=>"info", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages", :action_port=>:absent, :action_protocol=>:absent})
+      expect(inst[1]).to eq({:name=>"mail.none /var/log/messages", :ensure=>:present, :facility=>"mail", :level=>"none", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages", :action_port=>:absent, :action_protocol=>:absent})
+      expect(inst[5]).to eq({:name=>"mail.* -/var/log/maillog", :ensure=>:present, :facility=>"mail", :level=>"*", :no_sync=>:true, :action_type=>"file", :action=>"/var/log/maillog", :action_port=>:absent, :action_protocol=>:absent})
+      expect(inst[8]).to eq({:name=>"uucp.crit /var/log/spooler", :ensure=>:present, :facility=>"uucp", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler", :action_port=>:absent, :action_protocol=>:absent})
+      expect(inst[9]).to eq({:name=>"news.crit /var/log/spooler", :ensure=>:present, :facility=>"news", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler", :action_port=>:absent, :action_protocol=>:absent})
     end
 
     describe "when creating settings" do
@@ -211,8 +211,8 @@ describe provider_class do
         ))
 
         aug_open(target, "Syslog.lns") do |aug|
-          aug.get("entry[selector/facility='local2']/action/file").should == "/var/log/test.log"
-          aug.match("entry[selector/facility='local2']/action/no_sync").size.should == 0
+          expect(aug.get("entry[selector/facility='local2']/action/file")).to eq("/var/log/test.log")
+          expect(aug.match("entry[selector/facility='local2']/action/no_sync").size).to eq(0)
         end
       end
     end
@@ -232,7 +232,7 @@ describe provider_class do
         ))
 
         aug_open(target, "Syslog.lns") do |aug|
-          aug.match("entry[selector/facility='cron']/action/no_sync").size.should == 1
+          expect(aug.match("entry[selector/facility='cron']/action/no_sync").size).to eq(1)
         end
       end
 
@@ -250,7 +250,7 @@ describe provider_class do
         ))
 
         aug_open(target, "Syslog.lns") do |aug|
-          aug.match("entry[selector/facility='mail']/action/no_sync").size.should == 0
+          expect(aug.match("entry[selector/facility='mail']/action/no_sync").size).to eq(0)
         end
       end
     end
@@ -269,7 +269,7 @@ describe provider_class do
         ))
 
         aug_open(target, "Syslog.lns") do |aug|
-          aug.match("entry[selector/facility='mail' and level='*']").size.should == 0
+          expect(aug.match("entry[selector/facility='mail' and level='*']").size).to eq(0)
         end
       end
     end
@@ -291,9 +291,9 @@ describe provider_class do
         :ensure      => "present"
       ))
 
-      txn.any_failed?.should_not == nil
-      @logs.first.level.should == :err
-      @logs.first.message.include?(target).should == true
+      expect(txn.any_failed?).not_to eq(nil)
+      expect(@logs.first.level).to eq(:err)
+      expect(@logs.first.message.include?(target)).to eq(true)
     end
   end
 end
