@@ -1,6 +1,9 @@
-[![Puppet Forge](http://img.shields.io/puppetforge/v/herculesteam/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_syslog)
-[![Build Status](https://travis-ci.org/hercules-team/augeasproviders_syslog.svg?branch=master)](https://travis-ci.org/hercules-team/augeasproviders_syslog)
+[![Puppet Forge Version](http://img.shields.io/puppetforge/v/herculesteam/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_syslog)
+[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/herculesteam/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_syslog)
+[![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/herculesteam/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_syslog)
+[![Build Status](https://img.shields.io/travis/hercules-team/augeasproviders_syslog/master.svg)](https://travis-ci.org/hercules-team/augeasproviders_syslog)
 [![Coverage Status](https://img.shields.io/coveralls/hercules-team/augeasproviders_syslog.svg)](https://coveralls.io/r/hercules-team/augeasproviders_syslog)
+[![Gemnasium](https://img.shields.io/gemnasium/hercules-team/augeasproviders_syslog.svg)](https://gemnasium.com/hercules-team/augeasproviders_syslog)
 
 
 # syslog: type/provider for syslog files for Puppet
