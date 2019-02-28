@@ -1,17 +1,9 @@
 #!/usr/bin/env rspec
 
 require 'spec_helper'
-
-FileTest.stubs(:exist?).returns false
-FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
 provider_class = Puppet::Type.type(:syslog).provider(:augeas)
 
 describe provider_class do
-  before :each do
-    FileTest.stubs(:exist?).returns false
-    FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-  end
-
   let(:protocol_supported) { subject.protocol_supported }
 
   context "with empty file" do
@@ -19,6 +11,11 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it "should create simple new entry" do
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
       apply!(Puppet::Type.type(:syslog).new(
         :name        => "my test",
         :facility    => "local2",
@@ -38,6 +35,11 @@ describe provider_class do
     end
 
     it "should create hostname entry with tcp protocol" do
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
       if protocol_supported
         apply!(Puppet::Type.type(:syslog).new(
           :name            => "hostname test",
@@ -75,6 +77,11 @@ describe provider_class do
     end
 
     it "should create hostname entry with udp protocol" do
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
       if protocol_supported == :stock
         apply!(Puppet::Type.type(:syslog).new(
           :name            => "hostname test",
@@ -130,6 +137,11 @@ describe provider_class do
     end
 
     it "should create hostname entry with port" do
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
       if protocol_supported  # port requires protocol
         apply!(Puppet::Type.type(:syslog).new(
           :name            => "hostname test",
@@ -174,6 +186,11 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it "should list instances" do
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
       provider_class.stubs(:target).returns(target)
       inst = provider_class.instances.map { |p|
         {
@@ -199,6 +216,11 @@ describe provider_class do
 
     describe "when creating settings" do
       it "should create a simple new entry" do
+        FileTest.stubs(:exist?).returns false
+        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+        FileTest.stubs(:exist?).returns false
+        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
         apply!(Puppet::Type.type(:syslog).new(
           :name        => "my test",
           :facility    => "local2",
@@ -219,6 +241,11 @@ describe provider_class do
 
     describe "when modifying settings" do
       it "should add a no_sync flag" do
+        FileTest.stubs(:exist?).returns false
+        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+        FileTest.stubs(:exist?).returns false
+        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
         apply!(Puppet::Type.type(:syslog).new(
           :name        => "cron.*",
           :facility    => "cron",
@@ -237,6 +264,11 @@ describe provider_class do
       end
 
       it "should remove the no_sync flag" do
+        FileTest.stubs(:exist?).returns false
+        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+        FileTest.stubs(:exist?).returns false
+        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
         apply!(Puppet::Type.type(:syslog).new(
           :name        => "mail.*",
           :facility    => "mail",
@@ -257,6 +289,11 @@ describe provider_class do
 
     describe "when removing settings" do
       it "should remove the entry" do
+        FileTest.stubs(:exist?).returns false
+        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+        FileTest.stubs(:exist?).returns false
+        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
         apply!(Puppet::Type.type(:syslog).new(
           :name        => "mail.*",
           :facility    => "mail",
@@ -280,6 +317,11 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it "should fail to load" do
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      FileTest.stubs(:exist?).returns false
+      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+
       txn = apply(Puppet::Type.type(:syslog).new(
         :name        => "mail.*",
         :facility    => "mail",
