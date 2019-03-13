@@ -6,9 +6,9 @@
 [![Gemnasium](https://img.shields.io/gemnasium/hercules-team/augeasproviders_syslog.svg)](https://gemnasium.com/hercules-team/augeasproviders_syslog)
 
 
-# syslog: type/provider for syslog files for Puppet
+# syslog: types/providers for syslog files for Puppet
 
-This module provides a new type/provider for Puppet to read and modify syslog
+This module provides new types/providers for Puppet to read and modify syslog
 config files using the Augeas configuration library.
 
 The advantage of using Augeas over the default Puppet `parsedfile`
@@ -54,6 +54,7 @@ Augeas Versions           | 0.10.0  | 1.0.0   | 1.1.0   | 1.2.0   |
 **PROVIDERS**             |
 syslog (augeas)           | **yes** | **yes** | **yes** | **yes** |
 syslog (rsyslog)          | no      | **yes** | **yes** | **yes** |
+rsyslog\_filter (augeas)          | no      | **yes** | **yes** | **yes** |
 
 ## Documentation and examples
 
