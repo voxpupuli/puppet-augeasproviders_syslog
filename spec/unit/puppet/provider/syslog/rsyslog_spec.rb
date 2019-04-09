@@ -211,12 +211,13 @@ describe provider_class, :if => valid_lens? do
         }
       }
 
-      expect(inst.size).to eq(10)
+      expect(inst.size).to eq(11)
       expect(inst[0]).to eq({:name=>"*.info /var/log/messages", :ensure=>:present, :facility=>"*", :level=>"info", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages", :action_port=>:absent, :action_protocol=>:absent})
       expect(inst[1]).to eq({:name=>"mail.none /var/log/messages", :ensure=>:present, :facility=>"mail", :level=>"none", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/messages", :action_port=>:absent, :action_protocol=>:absent})
       expect(inst[5]).to eq({:name=>"mail.* -/var/log/maillog", :ensure=>:present, :facility=>"mail", :level=>"*", :no_sync=>:true, :action_type=>"file", :action=>"/var/log/maillog", :action_port=>:absent, :action_protocol=>:absent})
       expect(inst[8]).to eq({:name=>"news.crit /var/log/spooler", :ensure=>:present, :facility=>"news", :level=>"crit", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/spooler", :action_port=>:absent, :action_protocol=>:absent})
       expect(inst[9]).to eq({:name=>"local7.* /var/log/boot.log", :ensure=>:present, :facility=>"local7", :level=>"*", :no_sync=>:false, :action_type=>"file", :action=>"/var/log/boot.log", :action_port=>:absent, :action_protocol=>:absent})
+      expect(inst[10]).to eq({:name=>"*.* ?DynamicFile", :ensure=>:present, :facility=>"*", :level=>"*", :no_sync=>:false, :action_type=>"dynamic", :action=>"DynamicFile", :action_port=>:absent, :action_protocol=>:absent})
     end
 
     describe "when creating settings" do

@@ -58,7 +58,7 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
       aug.match("$target/entry").each do |apath|
         aug.match("#{apath}/selector").each do |snode|
           aug.match("#{snode}/facility").each do |fnode|
-            facility = aug.get(fnode) 
+            facility = aug.get(fnode)
             level = aug.get("#{snode}/level")
             no_sync = aug.match("#{apath}/action/no_sync").empty? ? :false : :true
             action_type_node = aug.match("#{apath}/action/*[label() != 'no_sync']")
@@ -68,6 +68,7 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
             action = aug.get("#{apath}/action/#{action_type}")
             name = "#{facility}.#{level} "
             name += "-" if no_sync == :true
+            name += "?" if action_type == "dynamic"
             name += action_protocol if action_type == "hostname"
             name += "#{action}"
             entry = {:ensure => :present, :name => name,
@@ -86,7 +87,7 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
     end
   end
 
-  def create 
+  def create
     facility = resource[:facility]
     level = resource[:level]
     no_sync = resource[:no_sync]

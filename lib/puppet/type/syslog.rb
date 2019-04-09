@@ -33,7 +33,9 @@ Puppet::Type.newtype(:syslog) do
   end
 
   newparam(:action_type) do
-    desc "The type of action: file, hostname, user or program."
+    desc "The type of action: file, hostname, user, program, or dynamic."
+
+    newvalues(:file, :hostname, :user, :program, :dynamic)
   end
 
   newparam(:action_protocol) do
