@@ -1,7 +1,7 @@
 {
   "name": "herculesteam-augeasproviders_syslog",
   "version": "2.3.0",
-  "author": "Dominic Cleal, Raphael Pinson",
+  "author": "Raphael Pinson",
   "summary": "Augeas-based syslog type and providers for Puppet",
   "license": "Apache-2.0",
   "source": "https://github.com/hercules-team/augeasproviders_syslog",
