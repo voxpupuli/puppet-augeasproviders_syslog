@@ -1,12 +1,12 @@
-# coding: utf-8
 # Alternative Augeas-based providers for Puppet
 #
 # Copyright (c) 2012 Raphaël Pinson
 # Licensed under the Apache License, Version 2.0
 
-raise("Missing augeasproviders_core dependency") if Puppet::Type.type(:augeasprovider).nil?
-Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeasprovider).provider(:default)) do
-  desc "Uses Augeas API to update a syslog.conf entry"
+raise('Missing augeasproviders_core dependency') if Puppet::Type.type(:augeasprovider).nil?
+
+Puppet::Type.type(:syslog).provide(:augeas, parent: Puppet::Type.type(:augeasprovider).provider(:default)) do
+  desc 'Uses Augeas API to update a syslog.conf entry'
 
   default_file { '/etc/syslog.conf' }
 
@@ -18,7 +18,7 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
     end
   end
 
-  confine :feature => :augeas
+  confine feature: :augeas
 
   resource_path do |resource|
     entry_path(resource)
@@ -26,17 +26,16 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
 
   def protocol_supported
     return @protocol_supported unless @protocol_supported.nil?
-    if Puppet::Util::Package.versioncmp(aug_version, '1.2.0') >= 0
-      @protocol_supported = :stock
-    else
-      if parsed_as?("*.* @syslog.far.away:123\n", 'entry/action/protocol')
-        @protocol_supported = :stock
-      elsif parsed_as?("*.* @@syslog.far.away:123\n", 'entry/action/protocol')
-        @protocol_supported = :el7
-      else
-        @protocol_supported = false
-      end
-    end
+
+    @protocol_supported = if Puppet::Util::Package.versioncmp(aug_version, '1.2.0') >= 0
+                            :stock
+                          elsif parsed_as?("*.* @syslog.far.away:123\n", 'entry/action/protocol')
+                            :stock
+                          elsif parsed_as?("*.* @@syslog.far.away:123\n", 'entry/action/protocol')
+                            :el7
+                          else
+                            false
+                          end
   end
 
   # We need to define an entry_path method
@@ -55,10 +54,10 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
     augopen do |aug|
       resources = []
 
-      aug.match("$target/entry").each do |apath|
+      aug.match('$target/entry').each do |apath|
         aug.match("#{apath}/selector").each do |snode|
           aug.match("#{snode}/facility").each do |fnode|
-            facility = aug.get(fnode) 
+            facility = aug.get(fnode)
             level = aug.get("#{snode}/level")
             no_sync = aug.match("#{apath}/action/no_sync").empty? ? :false : :true
             action_type_node = aug.match("#{apath}/action/*[label() != 'no_sync']")
@@ -67,16 +66,16 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
             action_protocol = aug.get("#{apath}/action/protocol")
             action = aug.get("#{apath}/action/#{action_type}")
             name = "#{facility}.#{level} "
-            name += "-" if no_sync == :true
-            name += action_protocol if action_type == "hostname"
+            name += '-' if no_sync == :true
+            name += action_protocol if action_type == 'hostname'
             name += "#{action}"
-            entry = {:ensure => :present, :name => name,
-                     :facility => facility, :level => level,
-                     :no_sync => no_sync,
-                     :action_type => action_type,
-                     :action_port => action_port,
-                     :action_protocol => action_protocol,
-                     :action => action}
+            entry = { ensure: :present, name: name,
+                      facility: facility, level: level,
+                      no_sync: no_sync,
+                      action_type: action_type,
+                      action_port: action_port,
+                      action_protocol: action_protocol,
+                      action: action }
             resources << new(entry)
           end
         end
@@ -86,7 +85,7 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
     end
   end
 
-  def create 
+  def create
     facility = resource[:facility]
     level = resource[:level]
     no_sync = resource[:no_sync]
@@ -99,17 +98,15 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
       aug.defnode('resource', resource_path, nil)
       aug.set('$resource/selector/facility', facility)
       aug.set('$resource/selector/level', level)
-      if no_sync == :true and action_type == 'file'
-        aug.clear('$resource/action/no_sync')
-      end
+      aug.clear('$resource/action/no_sync') if no_sync == :true and action_type == 'file'
       if action_protocol
         case protocol_supported
-          when :stock
-            aug.set('$resource/action/protocol', action_protocol)
-          when :el7
-            aug.set('$resource/action/protocol', action_protocol) if action_protocol == '@@'
-          else
-            raise(Puppet::Error, 'Protocol is not supported in this lens')
+        when :stock
+          aug.set('$resource/action/protocol', action_protocol)
+        when :el7
+          aug.set('$resource/action/protocol', action_protocol) if action_protocol == '@@'
+        else
+          raise(Puppet::Error, 'Protocol is not supported in this lens')
         end
       end
       aug.set("$resource/action/#{action_type}", action)
@@ -132,7 +129,7 @@ Puppet::Type.type(:syslog).provide(:augeas, :parent => Puppet::Type.type(:augeas
       if no_sync == :true
         if aug.match('$resource/action/no_sync').empty?
           # Insert a no_sync node before the action/file node
-          aug.insert('$resource/action/file', "no_sync", true)
+          aug.insert('$resource/action/file', 'no_sync', true)
         end
       else
         # Remove the no_sync tag

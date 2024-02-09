@@ -3,8 +3,8 @@
 # Copyright (c) 2012 Raphaël Pinson
 # Licensed under the Apache License, Version 2.0
 
-Puppet::Type.type(:syslog).provide(:rsyslog, :parent => :augeas) do
-  desc "Uses Augeas API to update an rsyslog.conf entry"
+Puppet::Type.type(:syslog).provide(:rsyslog, parent: :augeas) do
+  desc 'Uses Augeas API to update an rsyslog.conf entry'
 
   default_file { '/etc/rsyslog.conf' }
   lens { 'Rsyslog.lns' }
@@ -13,5 +13,5 @@ Puppet::Type.type(:syslog).provide(:rsyslog, :parent => :augeas) do
     entry_path(resource)
   end
 
-  confine :feature => :augeas
+  confine feature: :augeas
 end
