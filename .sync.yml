@@ -6,6 +6,7 @@ Gemfile:
   optional:
     ':test':
       - gem: ruby-augeas
+      - gem: rspec-mocks
 spec/spec_helper.rb:
   spec_overrides:
     - "require 'augeas_spec'"
