@@ -11,10 +11,10 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it 'creates simple new entry' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
       apply!(Puppet::Type.type(:syslog).new(
                name: 'my test',
@@ -35,10 +35,10 @@ describe provider_class do
     end
 
     it 'creates hostname entry with tcp protocol' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
       if protocol_supported
         apply!(Puppet::Type.type(:syslog).new(
@@ -77,10 +77,10 @@ describe provider_class do
     end
 
     it 'creates hostname entry with udp protocol' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
       if protocol_supported == :stock
         apply!(Puppet::Type.type(:syslog).new(
@@ -137,10 +137,10 @@ describe provider_class do
     end
 
     it 'creates hostname entry with port' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
       if protocol_supported  # port requires protocol
         apply!(Puppet::Type.type(:syslog).new(
@@ -186,12 +186,12 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it 'lists instances' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
-      provider_class.stubs(:target).returns(target)
+      allow(provider_class).to receive(:target).and_return(target)
       inst = provider_class.instances.map do |p|
         {
           name: p.get(:name),
@@ -216,10 +216,10 @@ describe provider_class do
 
     describe 'when creating settings' do
       it 'creates a simple new entry' do
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
         apply!(Puppet::Type.type(:syslog).new(
                  name: 'my test',
@@ -241,10 +241,10 @@ describe provider_class do
 
     describe 'when modifying settings' do
       it 'adds a no_sync flag' do
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
         apply!(Puppet::Type.type(:syslog).new(
                  name: 'cron.*',
@@ -264,10 +264,10 @@ describe provider_class do
       end
 
       it 'removes the no_sync flag' do
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
         apply!(Puppet::Type.type(:syslog).new(
                  name: 'mail.*',
@@ -289,10 +289,10 @@ describe provider_class do
 
     describe 'when removing settings' do
       it 'removes the entry' do
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
         apply!(Puppet::Type.type(:syslog).new(
                  name: 'mail.*',
@@ -317,10 +317,10 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it 'fails to load' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/syslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
       txn = apply(Puppet::Type.type(:syslog).new(
                     name: 'mail.*',

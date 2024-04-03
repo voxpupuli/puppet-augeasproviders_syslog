@@ -11,10 +11,10 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it 'creates new entry with file' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
       apply!(Puppet::Type.type(:rsyslog_filter).new(
                name: 'my test',
@@ -36,10 +36,10 @@ describe provider_class do
     end
 
     it 'creates new entry with protocol/hostname/port' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
       apply!(Puppet::Type.type(:rsyslog_filter).new(
                name: 'my test',
@@ -68,12 +68,12 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it 'lists instances' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
-      provider_class.stubs(:target).returns(target)
+      allow(provider_class).to receive(:target).and_return(target)
       inst = provider_class.instances.map do |p|
         {
           name: p.get(:name),
@@ -104,10 +104,10 @@ describe provider_class do
 
     describe 'when creating settings' do
       it 'creates a simple new entry' do
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
         apply!(Puppet::Type.type(:rsyslog_filter).new(
                  name: 'my test',
@@ -129,10 +129,10 @@ describe provider_class do
 
     describe 'when modifying settings' do
       it 'uses file' do
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
         apply!(Puppet::Type.type(:rsyslog_filter).new(
                  name: 'ssh',
@@ -154,10 +154,10 @@ describe provider_class do
 
     describe 'when removing settings' do
       it 'removes the entry' do
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
-        FileTest.stubs(:exist?).returns false
-        FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+        allow(FileTest).to receive(:exist?).and_return(false)
+        allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
         apply!(Puppet::Type.type(:rsyslog_filter).new(
                  name: 'ssh',
@@ -183,10 +183,10 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it 'fails to load' do
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
-      FileTest.stubs(:exist?).returns false
-      FileTest.stubs(:exist?).with('/etc/rsyslog.conf').returns true
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
+      allow(FileTest).to receive(:exist?).and_return(false)
+      allow(FileTest).to receive(:exist?).with('/etc/rsyslog.conf').and_return(true)
 
       txn = apply(Puppet::Type.type(:rsyslog_filter).new(
                     name: 'ssh',
