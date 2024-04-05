@@ -1,12 +1,12 @@
 {
-  "name": "herculesteam-augeasproviders_syslog",
+  "name": "puppet-augeasproviders_syslog",
   "version": "2.3.0",
   "author": "Raphael Pinson",
   "summary": "Augeas-based syslog type and providers for Puppet",
   "license": "Apache-2.0",
-  "source": "https://github.com/hercules-team/augeasproviders_syslog",
-  "project_page": "https://github.com/hercules-team/augeasproviders_syslog",
-  "issues_url": "https://github.com/hercules-team/augeasproviders_syslog/issues",
+  "source": "https://github.com/voxpupuli/puppet-augeasproviders_syslog",
+  "project_page": "https://github.com/voxpupuli/puppet-augeasproviders_syslog",
+  "issues_url": "https://github.com/voxpupuli/puppet-augeasproviders_syslog/issues",
   "description": "This module provides type/providers for syslog using the Augeas configuration API library.",
   "dependencies": [
     {
