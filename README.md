@@ -161,3 +161,34 @@ handles the extended rsyslog config (this requires Augeas 1.0.0).
 ## Issues
 
 Please file any issues or suggestions [on GitHub](https://github.com/voxpupuli/augeasproviders_syslog/issues).
+
+## Supported OS
+
+See [metadata.json](metadata.json) for supported OS versions.
+
+## Dependencies
+
+See [metadata.json](metadata.json) for dependencies.
+
+## Puppet
+
+The supported Puppet versions are listed in the [metadata.json](metadata.json)
+
+## REFERENCES
+
+Please see [REFERENCE.md](https://github.com/voxpupuli/puppet-augeasproviders_syslog/blob/master/REFERENCE.md) for more details.
+
+## Contributing
+
+Please report bugs and feature request using [GitHub issue
+tracker](https://github.com/voxpupuli/puppet-augeasproviders_syslog/issues).
+
+For pull requests, it is very much appreciated to check your Puppet manifest
+with [puppet-lint](https://github.com/puppetlabs/puppet-lint/) to follow the recommended Puppet style guidelines from the
+[Puppet Labs style guide](https://www.puppet.com/docs/puppet/latest/style_guide.html).
+
+## Transfer Notice
+
+This plugin was originally authored by [Hercules Team](https://github.com/hercules-team).
+The maintainer preferred that Puppet Community take ownership of the module for future improvement and maintenance.
+Existing pull requests and issues were transferred over, please fork and continue to contribute here instead of Hercules Team.
