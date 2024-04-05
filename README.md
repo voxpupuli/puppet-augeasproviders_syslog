@@ -1,11 +1,9 @@
-[![Puppet Forge Version](http://img.shields.io/puppetforge/v/herculesteam/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_syslog)
-[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/herculesteam/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_syslog)
-[![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/herculesteam/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_syslog)
-[![Build Status](https://img.shields.io/travis/hercules-team/augeasproviders_syslog/master.svg)](https://travis-ci.org/hercules-team/augeasproviders_syslog)
-[![Coverage Status](https://img.shields.io/coveralls/hercules-team/augeasproviders_syslog.svg)](https://coveralls.io/r/hercules-team/augeasproviders_syslog)
-[![Gemnasium](https://img.shields.io/gemnasium/hercules-team/augeasproviders_syslog.svg)](https://gemnasium.com/hercules-team/augeasproviders_syslog)
-[![Sponsor](https://img.shields.io/badge/%E2%99%A5-Sponsor-hotpink.svg)](https://github.com/sponsors/raphink)
-
+[![License](https://img.shields.io/github/license/voxpupuli/puppet-augeasproviders_syslog.svg)](https://github.com/voxpupuli/puppet-augeasproviders_syslog/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-augeasproviders_syslog.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-augeasproviders_syslog)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
 
 # syslog: types/providers for syslog files for Puppet
 
@@ -60,7 +58,7 @@ rsyslog\_filter (augeas)          | no      | **yes** | **yes** | **yes** |
 ## Documentation and examples
 
 Type documentation can be generated with `puppet doc -r type` or viewed on the
-[Puppet Forge page](http://forge.puppetlabs.com/herculesteam/augeasproviders_syslog).
+[Puppet Forge page](http://forge.puppetlabs.com/voxpupuli/augeasproviders_syslog).
 
 A `syslog` provider handles basic syslog configs, while an `rsyslog` provider
 handles the extended rsyslog config (this requires Augeas 1.0.0).
@@ -162,4 +160,4 @@ handles the extended rsyslog config (this requires Augeas 1.0.0).
 
 ## Issues
 
-Please file any issues or suggestions [on GitHub](https://github.com/hercules-team/augeasproviders_syslog/issues).
+Please file any issues or suggestions [on GitHub](https://github.com/voxpupuli/augeasproviders_syslog/issues).
