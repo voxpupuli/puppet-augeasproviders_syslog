@@ -1,7 +1,7 @@
 {
   "name": "puppet-augeasproviders_syslog",
   "version": "2.3.0",
-  "author": "Raphael Pinson",
+  "author": "Vox Pupuli",
   "summary": "Augeas-based syslog type and providers for Puppet",
   "license": "Apache-2.0",
   "source": "https://github.com/voxpupuli/puppet-augeasproviders_syslog",
