@@ -4,6 +4,7 @@
 [![Puppet Forge Version](http://img.shields.io/puppetforge/v/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
 [![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
 [![Build Status](https://github.com/voxpupuli/puppet-augeasproviders_syslog/workflows/CI/badge.svg)](https://github.com/voxpupuli/puppet-augeasproviders_syslog/actions?query=workflow%3ACI)
+[![Donated by Herculesteam](https://img.shields.io/badge/donated%20by-herculesteam-fb7047.svg)](#transfer-notice)
 
 # Features
 
