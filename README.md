@@ -1,11 +1,11 @@
-[![License](https://img.shields.io/github/license/voxpupuli/puppet-augeasproviders_syslog.svg)](https://github.com/voxpupuli/puppet-augeasproviders_syslog/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/voxpupuli/puppet-augeasproviders_syslog.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-augeasproviders_syslog)
-[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
-[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
-[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
-[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
-
 # syslog: types/providers for syslog files for Puppet
+
+[![License](https://img.shields.io/github/license/voxpupuli/puppet-augeasproviders_syslog.svg)](https://github.com/voxpupuli/puppet-augeasproviders_syslog/blob/master/LICENSE)
+[![Puppet Forge Version](http://img.shields.io/puppetforge/v/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
+[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/puppet/augeasproviders_syslog.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_syslog)
+[![Build Status](https://github.com/voxpupuli/puppet-augeasproviders_syslog/workflows/CI/badge.svg)](https://github.com/voxpupuli/puppet-augeasproviders_syslog/actions?query=workflow%3ACI)
+
+# Features
 
 This module provides new types/providers for Puppet to read and modify syslog
 config files using the Augeas configuration library.
