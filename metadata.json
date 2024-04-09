@@ -1,6 +1,6 @@
 {
   "name": "puppet-augeasproviders_syslog",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "author": "Vox Pupuli",
   "summary": "Augeas-based syslog type and providers for Puppet",
   "license": "Apache-2.0",
