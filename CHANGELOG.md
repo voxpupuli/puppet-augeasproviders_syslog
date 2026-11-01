@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/voxpupuli/puppet-augeasproviders_syslog/tree/v4.0.0) (2026-11-01)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_syslog/compare/v3.0.0...v4.0.0)
+
+**Breaking changes:**
+
+- Drop puppet, update openvox minimum version to 8.19 [\#34](https://github.com/voxpupuli/puppet-augeasproviders_syslog/pull/34) ([TheMeier](https://github.com/TheMeier))
+
+**Implemented enhancements:**
+
+- Add EL8/9/10, Debian 12/13 & Ubuntu 22.04/24.04/26.04 support [\#48](https://github.com/voxpupuli/puppet-augeasproviders_syslog/pull/48) ([bwitt](https://github.com/bwitt))
+- Update requirements to allow OpenVox 9 [\#45](https://github.com/voxpupuli/puppet-augeasproviders_syslog/pull/45) ([sebastianrakel](https://github.com/sebastianrakel))
+- metadata.json: Add OpenVox [\#31](https://github.com/voxpupuli/puppet-augeasproviders_syslog/pull/31) ([jstraw](https://github.com/jstraw))
+
+**Closed issues:**
+
+- Renewing Puppet Forge Approved Status [\#9](https://github.com/voxpupuli/puppet-augeasproviders_syslog/issues/9)
+
+**Merged pull requests:**
+
+- Add basic acceptance tests [\#47](https://github.com/voxpupuli/puppet-augeasproviders_syslog/pull/47) ([bwitt](https://github.com/bwitt))
+
 ## [v3.0.0](https://github.com/voxpupuli/puppet-augeasproviders_syslog/tree/v3.0.0) (2024-04-09)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_syslog/compare/2.3.0...v3.0.0)
